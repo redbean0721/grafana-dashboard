@@ -87,7 +87,7 @@
                 "showFieldSelector": false,
                 "showLabels": false,
                 "showLevel": true,
-                "showTime": false,
+                "showTime": true,
                 "sortOrder": "Descending",
                 "timestampResolution": "ms",
                 "unwrappedColumns": false,
