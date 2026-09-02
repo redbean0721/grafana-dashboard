@@ -1,0 +1,385 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "dbfx01ip70hhq8a"
+  },
+  "spec": {
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 100,
+        "title": "XDP Instant Status",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 1,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(increase(minecraft_dropped_packets{instance=\"tnn-1-taiwanfrp\"}[1m]))",
+            "legendFormat": "Dropped",
+            "refId": "A"
+          }
+        ],
+        "title": "Dropped Packets (1m)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(increase(minecraft_tcp_bypass{instance=\"tnn-1-taiwanfrp\"}[1m]))",
+            "legendFormat": "Bypass Attempts",
+            "refId": "A"
+          }
+        ],
+        "title": "TCP Bypass Attacks (1m)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 12,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(increase(minecraft_verified_connections{instance=\"tnn-1-taiwanfrp\"}[1m]))",
+            "legendFormat": "Verified",
+            "refId": "A"
+          }
+        ],
+        "title": "Verified Connections (1m)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 18,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(increase(minecraft_dropped_connections{instance=\"tnn-1-taiwanfrp\"}[1m]))",
+            "legendFormat": "Dropped Conns",
+            "refId": "A"
+          }
+        ],
+        "title": "Dropped Connections (1m)",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 101,
+        "title": "Traffic \u0026 Packet Analysis",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 15,
+              "lineInterpolation": "smooth"
+            },
+            "unit": "bps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Dropped Bandwidth"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 6
+        },
+        "id": 5,
+        "targets": [
+          {
+            "expr": "rate(minecraft_incoming_bytes{instance=\"tnn-1-taiwanfrp\"}[1m]) * 8",
+            "legendFormat": "Incoming Bandwidth",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(minecraft_dropped_bytes{instance=\"tnn-1-taiwanfrp\"}[1m]) * 8",
+            "legendFormat": "Dropped Bandwidth",
+            "refId": "B"
+          }
+        ],
+        "title": "Bandwidth (Total vs Dropped)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineInterpolation": "smooth"
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 6
+        },
+        "id": 6,
+        "targets": [
+          {
+            "expr": "rate(minecraft_syn_packets{instance=\"tnn-1-taiwanfrp\"}[1m])",
+            "legendFormat": "SYN Rate",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(minecraft_dropped_packets{instance=\"tnn-1-taiwanfrp\"}[1m])",
+            "legendFormat": "Dropped PPS",
+            "refId": "B"
+          },
+          {
+            "expr": "rate(minecraft_state_switches{instance=\"tnn-1-taiwanfrp\"}[1m])",
+            "legendFormat": "State Switches / s",
+            "refId": "C"
+          }
+        ],
+        "title": "Packet Rate \u0026 Actions",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+      "xdp",
+      "minecraft",
+      "ebpf",
+      "ddos"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "FRPS - Minecraft L7 XDP Filter"
+  }
+}
