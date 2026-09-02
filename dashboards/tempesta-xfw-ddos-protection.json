@@ -1,0 +1,504 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "ddfwzsxoczc0e8d"
+  },
+  "spec": {
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "title": "概覽與狀態 (Overview)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 5000
+                },
+                {
+                  "color": "red",
+                  "value": 50000
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 1
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_total_downstream_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "總 Ingress PPS",
+            "refId": "A"
+          }
+        ],
+        "title": "目前總進站 PPS",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "pps"
+          }
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 6,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.0.0",
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_total_downstream_ingress_packets{instance=~\"$instance\"}[1m])) - sum(rate(xfw_passed_downstream_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "丟包 PPS",
+            "refId": "A"
+          }
+        ],
+        "title": "惡意攻擊攔截/丟棄 (Drop PPS)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "Bps"
+          }
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 12,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ]
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_total_downstream_ingress_bytes{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "進站頻寬",
+            "refId": "A"
+          }
+        ],
+        "title": "當前進站流量頻寬",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "purple",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "Bps"
+          }
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 18,
+          "y": 1
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ]
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_total_upstream_egress_bytes{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "出站頻寬",
+            "refId": "A"
+          }
+        ],
+        "title": "當前出站流量頻寬",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 6,
+        "title": "進出流量與各協定趨勢 (Traffic \u0026 Protocols)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 15,
+              "lineWidth": 2
+            },
+            "unit": "pps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 6
+        },
+        "id": 7,
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_tcp_total_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP Ingress",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(xfw_udp_total_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "UDP Ingress",
+            "refId": "B"
+          },
+          {
+            "expr": "sum(rate(xfw_icmp_total_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "ICMP Ingress",
+            "refId": "C"
+          },
+          {
+            "expr": "sum(rate(xfw_arp_ingress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "ARP Ingress",
+            "refId": "D"
+          }
+        ],
+        "title": "各協定 Ingress 封包率 (PPS)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "lineWidth": 2
+            },
+            "unit": "pps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 6
+        },
+        "id": 8,
+        "options": {
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_syn_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP SYN",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(xfw_synack_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP SYN-ACK",
+            "refId": "B"
+          },
+          {
+            "expr": "sum(rate(xfw_ack_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP ACK",
+            "refId": "C"
+          },
+          {
+            "expr": "sum(rate(xfw_fin_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP FIN",
+            "refId": "D"
+          },
+          {
+            "expr": "sum(rate(xfw_rst_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP RST",
+            "refId": "E"
+          }
+        ],
+        "title": "TCP Flags 分佈趨勢 (SYN / ACK / RST)",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "id": 9,
+        "title": "防護與異常分析 (DDoS \u0026 Anomaly Tracking)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "bars",
+              "fillOpacity": 60,
+              "lineWidth": 1
+            },
+            "unit": "pps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 15
+        },
+        "id": 10,
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_tcp_badhdr_egress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "TCP Bad Header",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(xfw_udp_badhdr_egress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "UDP Bad Header",
+            "refId": "B"
+          },
+          {
+            "expr": "sum(rate(xfw_ip4_badhdr_egress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "IPv4 Bad Header",
+            "refId": "C"
+          },
+          {
+            "expr": "sum(rate(xfw_eth_badhdr_egress_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "Eth Bad Header",
+            "refId": "D"
+          }
+        ],
+        "title": "畸形封包偵測 (Malformed Headers)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "drawStyle": "line",
+              "fillOpacity": 15,
+              "lineWidth": 2
+            },
+            "unit": "pps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 15
+        },
+        "id": 11,
+        "targets": [
+          {
+            "expr": "sum(rate(xfw_syncookie_generated_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "SYN Cookie 產生",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(xfw_syncookie_received_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "SYN Cookie 驗證成功",
+            "refId": "B"
+          },
+          {
+            "expr": "sum(rate(xfw_syncookie_failed_packets{instance=~\"$instance\"}[1m]))",
+            "legendFormat": "SYN Cookie 驗證失敗 (攻擊)",
+            "refId": "C"
+          }
+        ],
+        "title": "TCP SYN Cookie 狀態",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+      "tempesta",
+      "xfw",
+      "ebpf",
+      "pve"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "pve-1",
+            "value": "pve-1"
+          },
+          "datasource": {
+            "type": "prometheus"
+          },
+          "definition": "label_values(xfw_total_downstream_ingress_packets, instance)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": false,
+          "name": "instance",
+          "query": {
+            "query": "label_values(xfw_total_downstream_ingress_packets, instance)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "title": "Tempesta xFW DDoS Protection"
+  }
+}
