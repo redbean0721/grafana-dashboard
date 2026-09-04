@@ -754,7 +754,7 @@
                     "insertNulls": false,
                     "lineInterpolation": "linear",
                     "lineWidth": 1,
-                    "pointSize": 5,
+                    "pointSize": 3,
                     "scaleDistribution": {
                       "type": "linear"
                     },
@@ -891,7 +891,7 @@
                     "insertNulls": false,
                     "lineInterpolation": "linear",
                     "lineWidth": 1,
-                    "pointSize": 5,
+                    "pointSize": 3,
                     "scaleDistribution": {
                       "type": "linear"
                     },
