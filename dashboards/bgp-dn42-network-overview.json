@@ -1194,7 +1194,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "histogram_quantile(0.95, sum by(le, host) (rate(smokeping_response_duration_seconds_bucket{instance=\"$instance\"}[5m]))) * 1000",
+                        "expr": "(\r\n  rate(smokeping_response_duration_seconds_sum{instance=\"$instance\"}[1m])\r\n  /\r\n  rate(smokeping_response_duration_seconds_count{instance=\"$instance\"}[1m])\r\n) * 1000",
                         "legendFormat": "{{host}}",
                         "range": true
                       },
@@ -1208,10 +1208,10 @@
               "transformations": []
             }
           },
-          "description": "95th percentile latency (過濾極端值後的真實延遲)",
+          "description": "Average latency (計算指定區間內的真實平均延遲，精準呈現網路抖動與微小波動)",
           "id": 9,
           "links": [],
-          "title": "Ping 延遲 (P95 Latency)",
+          "title": "Ping 平均延遲 (Avg Latency)",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
