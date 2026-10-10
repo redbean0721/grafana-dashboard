@@ -713,7 +713,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "topk(5, sum by (device) (increase(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[$__range]) + increase(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[$__range])))",
+                        "expr": "topk(5, sum by (device) (increase(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) + increase(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range])))",
                         "format": "time_series",
                         "instant": true,
                         "legendFormat": "{{device}}",
@@ -805,7 +805,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[2m])) * 8",
+                        "expr": "sum(rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])) * 8",
                         "legendFormat": "下載 (Total Rx)",
                         "range": true
                       },
@@ -826,7 +826,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[2m])) * 8",
+                        "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])) * 8",
                         "instant": false,
                         "legendFormat": "上傳 (Total Tx)",
                         "range": true
@@ -942,7 +942,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[2m]) * 8",
+                        "expr": "rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) * 8",
                         "legendFormat": "Rx - {{device}}",
                         "range": true
                       },
@@ -963,7 +963,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "- rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[2m]) * 8",
+                        "expr": "- rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) * 8",
                         "instant": false,
                         "legendFormat": "Tx - {{device}}",
                         "range": true
@@ -1079,7 +1079,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "rate(node_network_receive_drop_total{instance=\"$instance\", device=~\"wg.*|dn42.*\"}[2m])",
+                        "expr": "rate(node_network_receive_drop_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])",
                         "legendFormat": "{{device}} Drops",
                         "range": true
                       },
