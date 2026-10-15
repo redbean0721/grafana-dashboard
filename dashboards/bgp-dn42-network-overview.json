@@ -268,7 +268,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name, ip_version) (rate(bird_protocol_changes_update_import_receive_count{instance=\"$instance\", proto=\"BGP\"}[$__rate_interval]))",
+                        "expr": "sum by (name, ip_version) (rate(bird_protocol_changes_update_import_receive_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}[$__rate_interval]))",
                         "legendFormat": "Update - {{name}} (v{{ip_version}})",
                         "range": true
                       },
@@ -289,7 +289,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "- sum by (name, ip_version) (rate(bird_protocol_changes_withdraw_import_receive_count{instance=\"$instance\", proto=\"BGP\"}[$__rate_interval]))",
+                        "expr": "- sum by (name, ip_version) (rate(bird_protocol_changes_withdraw_import_receive_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}[$__rate_interval]))",
                         "legendFormat": "Withdraw - {{name}} (v{{ip_version}})",
                         "range": true
                       },
@@ -401,7 +401,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name, ip_version) (rate(bird_protocol_changes_update_export_receive_count{instance=\"$instance\", proto=\"BGP\"}[$__rate_interval]))",
+                        "expr": "sum by (name, ip_version) (rate(bird_protocol_changes_update_export_receive_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}[$__rate_interval]))",
                         "legendFormat": "Update - {{name}} (v{{ip_version}})",
                         "range": true
                       },
@@ -422,7 +422,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "- sum by (name, ip_version) (rate(bird_protocol_changes_withdraw_export_receive_count{instance=\"$instance\", proto=\"BGP\"}[$__rate_interval]))",
+                        "expr": "- sum by (name, ip_version) (rate(bird_protocol_changes_withdraw_export_receive_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}[$__rate_interval]))",
                         "legendFormat": "Withdraw - {{name}} (v{{ip_version}})",
                         "range": true
                       },
@@ -534,7 +534,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "count(count by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"} == 1)) or vector(0)",
+                        "expr": "count(count by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"} == 1)) or vector(0)",
                         "legendFormat": "Established",
                         "range": true
                       },
@@ -556,7 +556,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "count(count by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"} == 0)) or vector(0)",
+                        "expr": "count(count by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"} == 0)) or vector(0)",
                         "instant": false,
                         "legendFormat": "Down",
                         "range": true
@@ -642,7 +642,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (ip_version) (bird_protocol_prefix_preferred_count{instance=\"$instance\", proto=\"BGP\"})",
+                        "expr": "sum by (ip_version) (bird_protocol_prefix_preferred_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})",
                         "legendFormat": "IPv{{ip_version}} Best Routes",
                         "range": true
                       },
@@ -728,7 +728,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (name, ip_version) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"})",
+                        "expr": "max by (name, ip_version) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})",
                         "format": "table",
                         "instant": true,
                         "legendFormat": "連線狀態",
@@ -752,7 +752,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (name, ip_version) (bird_protocol_prefix_import_count{instance=\"$instance\", proto=\"BGP\"})",
+                        "expr": "max by (name, ip_version) (bird_protocol_prefix_import_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})",
                         "format": "table",
                         "instant": true,
                         "legendFormat": "Import 路由",
@@ -776,7 +776,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (name, ip_version) (bird_protocol_prefix_export_count{instance=\"$instance\", proto=\"BGP\"})",
+                        "expr": "max by (name, ip_version) (bird_protocol_prefix_export_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})",
                         "format": "table",
                         "instant": true,
                         "legendFormat": "Export 路由",
@@ -800,7 +800,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "max by (name, ip_version) (bird_protocol_prefix_preferred_count{instance=\"$instance\", proto=\"BGP\"})",
+                        "expr": "max by (name, ip_version) (bird_protocol_prefix_preferred_count{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})",
                         "format": "table",
                         "instant": true,
                         "legendFormat": "Preferred 路由",
@@ -979,7 +979,7 @@
                       "spec": {
                         "editorMode": "code",
                         "exemplar": false,
-                        "expr": "topk(5, sum by (device) (increase(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) + increase(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range])))",
+                        "expr": "topk(5, sum by (device) ((increase(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or increase(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"})))) + (increase(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or increase(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[$__range]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"}))))))",
                         "format": "time_series",
                         "instant": true,
                         "legendFormat": "{{device}}",
@@ -1071,7 +1071,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])) * 8",
+                        "expr": "sum((rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"}))))) * 8",
                         "legendFormat": "下載 (Total Rx)",
                         "range": true
                       },
@@ -1092,7 +1092,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])) * 8",
+                        "expr": "sum((rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"}))))) * 8",
                         "instant": false,
                         "legendFormat": "上傳 (Total Tx)",
                         "range": true
@@ -1208,7 +1208,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) * 8",
+                        "expr": "(rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or rate(node_network_receive_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"})))) * 8",
                         "legendFormat": "Rx - {{device}}",
                         "range": true
                       },
@@ -1229,7 +1229,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "- rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) * 8",
+                        "expr": "- (rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or rate(node_network_transmit_bytes_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"})))) * 8",
                         "instant": false,
                         "legendFormat": "Tx - {{device}}",
                         "range": true
@@ -1345,7 +1345,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "rate(node_network_receive_drop_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m])",
+                        "expr": "(rate(node_network_receive_drop_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on (device) (label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"dn42_$1\", \"name\", \"(?i)DN42_[0-9]*([0-9]{5})_v[46]\") or label_replace(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"}), \"device\", \"wg_$1\", \"name\", \"(?i)ibgp_(.+)\")) or rate(node_network_receive_drop_total{instance=\"$instance\", device=~\"wg.*|dn42.*|zt.*\"}[2m]) and on () (count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\", name=~\"$peer\"})) == count(group by (name) (bird_protocol_up{instance=\"$instance\", proto=\"BGP\"}))))",
                         "legendFormat": "{{device}} Drops",
                         "range": true
                       },
@@ -1822,6 +1822,44 @@
           "regexApplyTo": "value",
           "skipUrlSync": false,
           "sort": "disabled"
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allValue": ".*",
+          "allowCustomValue": true,
+          "current": {
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "definition": "label_values(bird_protocol_up{instance=\"$instance\", proto=\"BGP\"},name)",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Peer Session",
+          "multi": true,
+          "name": "peer",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "prometheus"
+            },
+            "group": "prometheus",
+            "kind": "DataQuery",
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(bird_protocol_up{instance=\"$instance\", proto=\"BGP\"},name)",
+              "refId": "PrometheusVariableQueryEditor-VariableQuery"
+            },
+            "version": "v0"
+          },
+          "refresh": "onTimeRangeChanged",
+          "regex": "",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "alphabeticalAsc"
         }
       }
     ]
